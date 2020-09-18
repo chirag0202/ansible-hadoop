@@ -1,0 +1,46 @@
+---
+# tasks file for hadoop
+- name: Creates directory
+  file:
+    path: /root/hadoop
+    state: directory
+
+- name: Get jdk
+  get_url:
+          url: https://github.com/chirag0202/jdk-hadoop/raw/master/jdk-8u171-linux-x64.rpm
+          dest: /root/hadoop
+          mode: '0666'
+
+- name: Get hadoop
+  get_url:
+          url: https://github.com/chirag0202/jdk-hadoop/raw/master/hadoop-1.2.1-1.x86_64.rpm
+          dest: /root/hadoop
+          mode: '0666'
+
+- name: Install JDK
+  zypper:
+          name: /root/hadoop/jdk-8u171-linux-x64.rpm
+          state: present
+
+- name: Install hadoop
+  zypper:
+          name: /root/hadoop/hadoop-1.2.1-1.x86_64.rpm
+          state: present
+          force: yes
+
+- name: Creates directory
+  file:
+    path: /dn
+    state: directory
+
+- name: Configure hadoop
+  template:
+          src: "hdfs-site.xml.j2"
+          dest: /etc/hadoop/hdfs-site.xml
+          mode: '0666' 
+
+- name: Configure hadoop
+  template:
+          src: "core-site.xml.j2"
+          dest: /etc/hadoop/core-site.xml
+          mode: '0666'
