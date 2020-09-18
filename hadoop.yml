@@ -2,3 +2,8 @@
 - hosts: hadoop
   roles:
           - role: hadoop
+
+- hosts: hadoopslave
+  roles:
+          - role: hadoopslave
+
