@@ -53,3 +53,8 @@
 - name: File system
   command:
           cmd: "hadoop namenode -format"
+
+- name: File system
+  command:
+          cmd: "/etc/hadoop/hadoop-daemon.sh start namenode"
+

@@ -28,6 +28,11 @@
           state: present
           force: yes
 
+- firewalld:
+    port: 9001/tcp
+    permanent: true
+    state: enabled
+
 - name: Creates directory
   file:
     path: /dn
@@ -44,3 +49,8 @@
           src: "core-site.xml.j2"
           dest: /etc/hadoop/core-site.xml
           mode: '0666'
+
+- name: File system
+  command:
+          cmd: "hadoop-daemon.sh start datanode"
+
